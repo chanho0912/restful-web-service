@@ -16,3 +16,6 @@
     * Spring Data JPA
     * H2 Database
 
+## application.properties
+1. using port 8088 you can put this code.
+```server.port=8088```
