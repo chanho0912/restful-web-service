@@ -9,6 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -17,7 +20,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor @NoArgsConstructor
 //@JsonFilter("AccountInfo")
 @ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")
+@Entity
 public class Account {
+
+    @Id @GeneratedValue
     private Integer id;
 
     @Size(min=2, message = "name은 2글자 이상 입력해 주세요.")
