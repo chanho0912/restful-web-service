@@ -19,3 +19,13 @@
 ## application.properties
 1. using port 8088 you can put this code.
 ```server.port=8088```
+
+
+## HateOas
+1. dependency
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-hateoas</artifactId>
+</dependency>
+```
