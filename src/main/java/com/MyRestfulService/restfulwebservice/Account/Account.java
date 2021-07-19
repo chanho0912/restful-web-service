@@ -1,5 +1,6 @@
 package com.MyRestfulService.restfulwebservice.Account;
 
+import com.MyRestfulService.restfulwebservice.Post.Post;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
@@ -9,15 +10,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
 //@JsonFilter("AccountInfo")
 @ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")
+@Entity
 public class Account {
+
+    @Id @GeneratedValue
     private Integer id;
 
     @Size(min=2, message = "name은 2글자 이상 입력해 주세요.")
@@ -35,6 +44,17 @@ public class Account {
 //    @JsonIgnore
     @ApiModelProperty(notes = "사용자의 주빈번호를 입력해 주세요")
     private String ssn;
+
+    @OneToMany(mappedBy = "account")
+    private List<Post> posts;
+
+    public Account(Integer id, String name, LocalDateTime joinAt, String password, String ssn) {
+        this.id = id;
+        this.name = name;
+        this.joinAt = joinAt;
+        this.password = password;
+        this.ssn = ssn;
+    }
 
     public int updateAccount(String updateName) {
         this.name = updateName;
